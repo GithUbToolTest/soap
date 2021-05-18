@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ip:purchase-order xmlns:ip="http://www.ibm.com/product/sales" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ibm.com/product/sales file:///D:\SrimansirPractice\Web-Services\jax-b\pojaxb\src\main\resources\po.xsd">
+	<products>
+		<product>
+			<product-code>HG2656</product-code>
+			<quantity>10</quantity>
+		</product>
+	</products>
+	<shipping-address>
+		<address-line1>gauri  nagar</address-line1>
+		<address-line2>near jai gurudev kirana</address-line2>
+		<zip-code>452010</zip-code>
+		<state>MP</state>
+		<country>india</country>
+	</shipping-address>
+
+</ip:purchase-order>

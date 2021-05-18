@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ip="http://www.ibm.com/product/sales" targetNamespace="http://www.ibm.com/product/sales">
+	<xs:element name="purchase-order" type="ip:purchaseOrderType"/>
+	<xs:complexType name="purchaseOrderType">
+		<xs:sequence>
+			<xs:element name="products" type="ip:productsType"/>
+			<xs:element name="shipping-address" type="ip:shippingAddressType"/>
+		</xs:sequence>
+	</xs:complexType>	
+	
+	<xs:complexType name="productsType">
+		<xs:sequence>
+			<xs:element name="product" type="ip:productType" minOccurs="1" maxOccurs="unbounded"/>	
+		</xs:sequence>
+	</xs:complexType> 	
+	
+	<xs:complexType name="productType">
+		<xs:sequence>
+			<xs:element name="product-code" type="xs:string"/>
+			<xs:element name="quantity" type="xs:int"/>
+		</xs:sequence>	
+	</xs:complexType>	
+	
+	<xs:complexType name="shippingAddressType">
+		<xs:sequence>
+				<xs:element name="address-line1" type="xs:string"/>
+				<xs:element name="address-line2" type="xs:string"/>
+				<xs:element name="zip-code" type="xs:int"/>	
+				<xs:element name="state" type="xs:string"/>
+				<xs:element name="country" type="xs:string"/>	
+		</xs:sequence>
+	</xs:complexType>	
+</xs:schema>
