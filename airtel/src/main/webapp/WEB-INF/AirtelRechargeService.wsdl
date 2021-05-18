@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions
+	xmlns:ars="http://www.airtel.in/recharge/services"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="AirtelRechargeService"
+	targetNamespace="http://www.airtel.in/recharge/services"
+	xmlns:art="http://www.airtel.in/recharge/types">
+	<wsdl:types>
+		<xsd:schema
+			targetNamespace="http://www.airtel.in/recharge/types">
+			<xsd:element name="recharge-info">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="mobile-no" type="xsd:string" />
+						<xsd:element name="provider" type="xsd:string" />
+						<xsd:element name="circle" type="xsd:string" />
+						<xsd:element name="plan-amount" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="receipt">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="reference-no" type="xsd:string" />
+						<xsd:element name="status" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="error">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="error-code" type="xsd:string" />
+						<xsd:element name="reason" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="recharge">
+		<wsdl:part element="art:recharge-info" name="in" />
+	</wsdl:message>
+	<wsdl:message name="rechargeResponse">
+		<wsdl:part element="art:receipt" name="out" />
+	</wsdl:message>
+	<wsdl:message name="PlanNotFoundFaultException">
+		<wsdl:part name="error" element="art:error"/>
+	</wsdl:message>
+	<wsdl:message name="InvailidMobileNumberFaultException">
+		<wsdl:part name="error" element="art:error"/>
+	</wsdl:message>
+	<wsdl:portType name="AirtelRechargeService">
+		<wsdl:operation name="recharge">
+			<wsdl:input message="ars:recharge" />
+			<wsdl:output message="ars:rechargeResponse" />
+			<wsdl:fault name="fault1" message="ars:PlanNotFoundFaultException"/>
+			<wsdl:fault name="fault2" message="ars:InvailidMobileNumberFaultException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="AirtelRechargeServiceSOAPBinding"
+		type="ars:AirtelRechargeService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="recharge">
+			<soap:operation
+				soapAction="http://www.airtel.in/recharge/services/recharge" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="fault1">
+				<soap:fault name="fault1" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="fault2">
+				<soap:fault name="fault2" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="AirtelRechargeService">
+		<wsdl:port binding="ars:AirtelRechargeServiceSOAPBinding"
+			name="AirtelRechargeServiceSOAP">
+			<soap:address location="http://www.example.org/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
