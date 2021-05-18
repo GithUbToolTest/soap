@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions
+	xmlns:bis="http://www.bajajalianz.com/insurance/services"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="insuranceService"
+	targetNamespace="http://www.bajajalianz.com/insurance/services"
+	xmlns:bit="http://www.bajajalianz.com/insurance/types">
+	<wsdl:types>
+		<xsd:schema
+			targetNamespace="http://www.bajajalianz.com/insurance/types">
+
+			<xsd:element name="plan">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="plan-no" type="xsd:int" />
+						<xsd:element name="plan-name" type="xsd:string" />
+						<xsd:element name="tenure" type="xsd:int" />
+						<xsd:element name="insured-amount" type="xsd:float" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="member">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="full-name" type="xsd:string" />
+						<xsd:element name="age" type="xsd:int" />
+						<xsd:element name="gender" type="xsd:string" />
+						<xsd:element name="email-address" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="policy">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="policy-no" type="xsd:int" />
+						<xsd:element name="policy-name" type="xsd:string" />
+						<xsd:element name="tenure" type="xsd:int" />
+						<xsd:element name="insured-amount" type="xsd:float" />
+						<xsd:element name="insured-policy-member"
+							type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="enroll">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="bit:plan" />
+						<xsd:element ref="bit:member" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="enrollResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="bit:policy" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="enroll">
+		<wsdl:part name="in" element="bit:enroll" />
+	</wsdl:message>
+	<wsdl:message name="enrollResponse">
+		<wsdl:part name="out" element="bit:enrollResponse" />
+	</wsdl:message>
+	<wsdl:portType name="insurance">
+		<wsdl:operation name="enroll">
+			<wsdl:input message="bis:enroll" />
+			<wsdl:output message="bis:enrollResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="insuranceServiceSOAP"
+		type="bis:insurance">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="enroll">
+			<soap:operation
+				soapAction="http://www.bajajalianz.com/insurance/services/enroll" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="insuranceService">
+		<wsdl:port binding="bis:insuranceServiceSOAP"
+			name="insuranceServiceSOAP">
+			<soap:address location="http://www.example.org/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
