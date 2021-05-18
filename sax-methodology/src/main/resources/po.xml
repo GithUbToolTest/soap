@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<purchase-order>
+	<products>
+		<product>
+			<product-code>hb2</product-code>
+			<quantity>5</quantity>
+		</product>
+		<product>
+			<product-code>jjhdhs6</product-code>
+			<quantity>5</quantity>
+		</product>
+		<product>
+			<product-code>jf6</product-code>
+			<quantity>500</quantity>
+		</product>
+	</products>
+	<shipping-address>
+		<address-line1>239,new</address-line1>
+		<address-line2>gauri nagar</address-line2>
+		<zip-code>452010</zip-code>
+		<state>mp</state>
+		<country>india</country>
+	</shipping-address>
+</purchase-order>
